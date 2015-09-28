@@ -14,7 +14,7 @@ type 'a unrolled_linked_list = {
 type 'a t = 'a unrolled_linked_list
 
 let make node_capacity =
-  { node_capacity = node_capacity;
+  { node_capacity;
     length = 0;
     first = None;
     last = None
@@ -33,7 +33,7 @@ let iter (f:'a -> unit) (xs:'a t) =
   in
   next xs.first
 
-let nth (xs:'a t) (n:int) =
+let get (xs:'a t) (n:int) =
   let rec find count = function
     | None -> failwith "Outside bounds"
     | Some node ->
@@ -41,6 +41,21 @@ let nth (xs:'a t) (n:int) =
       else find (count+node.count) node.next
   in
   find 0 xs.first
+
+let to_array (xs:'a t) =
+  let len = length xs in
+  if len = 0 then [||]
+  else begin
+    let ar = Array.make len (get xs 0) in
+    let rec copy index = function
+      | None -> ()
+      | Some node ->
+        Array.blit node.items 0 ar index node.count;
+        copy (index + node.count) node.next
+    in
+    copy 0 xs.first;
+    ar
+  end
 
 let add (xs:'a t) (x:'a) =
   let new_node (x:'a) =

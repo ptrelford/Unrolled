@@ -4,9 +4,11 @@ val make : int -> 'a t
 
 val length : 'a t -> int
 
+val to_array : 'a t -> 'a array
+
 val iter : ('a -> unit)  -> 'a t -> unit
 
-val nth : 'a t -> int -> 'a
+val get : 'a t -> int -> 'a
 
 val add : 'a t ->  'a -> unit
 
