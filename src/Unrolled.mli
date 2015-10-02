@@ -1,6 +1,6 @@
 type 'a t
 
-val make : int -> 'a t
+val make : node_capacity:int -> 'a t
 
 val length : 'a t -> int
 

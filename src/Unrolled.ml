@@ -13,7 +13,7 @@ type 'a unrolled_linked_list = {
 
 type 'a t = 'a unrolled_linked_list
 
-let make node_capacity =
+let make ~node_capacity =
   { node_capacity;
     length = 0;
     first = None;
@@ -45,7 +45,7 @@ let get (xs:'a t) (n:int) =
 let to_array (xs:'a t) =
   let len = length xs in
   if len = 0 then [||]
-  else begin
+  else (
     let ar = Array.make len (get xs 0) in
     let rec copy index = function
       | None -> ()
@@ -55,7 +55,7 @@ let to_array (xs:'a t) =
     in
     copy 0 xs.first;
     ar
-  end
+  )
 
 let add (xs:'a t) (x:'a) =
   let new_node (x:'a) =
