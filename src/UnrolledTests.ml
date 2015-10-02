@@ -18,10 +18,10 @@ let insert_10 () =
   for i = 1 to 10 do insert xs 0 1 done;
   length xs = 10
 
-let insert_10_remove_9 () =
+let insert_10_delete_9 () =
   let xs = make ~node_capacity:4 in
   for i = 1 to 10 do insert xs 0 1 done;
-  for i = 9 downto 1 do remove_at xs i done;
+  for i = 9 downto 1 do delete xs i done;
   length xs = 1
 
 let to_array_from_empty () =
@@ -51,7 +51,7 @@ let tests = [
   "add 1", (fun () -> let xs = make ~node_capacity:4 in add xs 1; length xs = 1);
   "add 10", add_10;
   "insert 10", insert_10;
-  "insert 10 - remove 9", insert_10_remove_9;
+  "insert 10 - delete 9", insert_10_delete_9;
   "to array from empty", to_array_from_empty;
   "to array from items", to_array_from_items;
   "get item", get_item;

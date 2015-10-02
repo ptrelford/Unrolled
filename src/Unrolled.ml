@@ -143,7 +143,7 @@ let insert (xs:'a t) (index:int) (x:'a) =
   if index = xs.length then add xs x
   else insert_left xs index x
 
-let remove_at (xs:'a t) (index:int) =
+let delete (xs:'a t) (index:int) =
   let rec find count previous node' =
     match node' with
     | None -> failwith "Outside bounds"

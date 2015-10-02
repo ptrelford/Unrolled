@@ -16,4 +16,4 @@ val add : 'a t ->  'a -> unit
 
 val insert : 'a t -> int -> 'a -> unit
 
-val remove_at : 'a t -> int -> unit
+val delete : 'a t -> int -> unit
