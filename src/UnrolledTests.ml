@@ -34,6 +34,18 @@ let to_array_from_items () =
   add xs 3;
   [|1;2;3|] = to_array xs
 
+let get_item () =
+  let xs = make ~node_capacity:2 in
+  let item = 1 in
+  add xs item;
+  item = get xs 0
+
+let set_item () =
+  let xs = make ~node_capacity:2 in
+  add xs "before";
+  set xs 0 "after";
+  get xs 0 = "after"
+
 let tests = [
   "empty", (fun () -> let xs = make ~node_capacity:4 in length xs = 0);
   "add 1", (fun () -> let xs = make ~node_capacity:4 in add xs 1; length xs = 1);
@@ -41,7 +53,9 @@ let tests = [
   "insert 10", insert_10;
   "insert 10 - remove 9", insert_10_remove_9;
   "to array from empty", to_array_from_empty;
-  "to array from items", to_array_from_items
+  "to array from items", to_array_from_items;
+  "get item", get_item;
+  "set item", set_item
 ]
 
 let () = run_tests tests

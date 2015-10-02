@@ -33,11 +33,20 @@ let iter (f:'a -> unit) (xs:'a t) =
   in
   next xs.first
 
-let get (xs:'a t) (n:int) =
+let get (xs:'a t) (index:int) =
   let rec find count = function
     | None -> failwith "Outside bounds"
     | Some node ->
-      if n < count + node.count then node.items.(count-n)
+      if index < count + node.count then node.items.(count-index)
+      else find (count+node.count) node.next
+  in
+  find 0 xs.first
+
+let set (xs:'a t) (index:int) (value:'a) =
+  let rec find count = function
+    | None -> failwith "Outside bounds"
+    | Some node ->
+      if index < count + node.count then node.items.(count-index) <- value
       else find (count+node.count) node.next
   in
   find 0 xs.first
