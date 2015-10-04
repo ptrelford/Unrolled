@@ -33,6 +33,19 @@ let iter (f:'a -> unit) (xs:'a t) =
   in
   next xs.first
 
+let findi (f:'a -> bool) (xs:'a t) =
+  let rec next count = function
+    | Some node ->
+      let i = ref 0 in
+      while !i < node.count && not (f (node.items.(!i))) do
+        incr i
+      done;
+      if !i = node.count then next (count+node.count) (node.next)
+      else count + !i
+    | None -> -1
+  in
+  next 0 xs.first
+
 let get (xs:'a t) (index:int) =
   let rec find count = function
     | None -> failwith "Outside bounds"

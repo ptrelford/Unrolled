@@ -14,6 +14,9 @@ val to_array : 'a t -> 'a array
 (** Iterates each item in the collection applying the given function *)
 val iter : ('a -> unit)  -> 'a t -> unit
 
+(** Returns the index of the first item that satisfies the specified predicate *)
+val findi : ('a -> bool) -> 'a t -> int
+
 (** Returns the item at the specified index *)
 val get : 'a t -> int -> 'a
 

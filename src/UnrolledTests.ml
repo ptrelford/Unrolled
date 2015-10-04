@@ -46,6 +46,13 @@ let set_item () =
   set xs 0 "after";
   get xs 0 = "after"
 
+let find_index () =
+  let xs = make ~node_capacity:4 in
+  for i = 0 to 10 do add xs i done;
+  findi ((=) 0) xs = 0 &&
+  findi ((=) 5) xs = 5 &&
+  findi ((=) 10) xs = 10
+
 let tests = [
   "empty", (fun () -> let xs = make ~node_capacity:4 in length xs = 0);
   "add 1", (fun () -> let xs = make ~node_capacity:4 in add xs 1; length xs = 1);
@@ -55,7 +62,8 @@ let tests = [
   "to array from empty", to_array_from_empty;
   "to array from items", to_array_from_items;
   "get item", get_item;
-  "set item", set_item
+  "set item", set_item;
+  "find index", find_index
 ]
 
 let () = run_tests tests
